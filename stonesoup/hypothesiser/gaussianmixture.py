@@ -92,7 +92,7 @@ class GaussianMixtureHypothesiser(Hypothesiser):
             reordered_hypotheses = list()
             # Get miss detected components
             miss_detections_hypothesis = MultipleHypothesis(
-                [x for x in single_hypothesis_list if not x])
+                [hyp for hyp in single_hypothesis_list if not hyp])
             for detection in detections:
                 # Create multiple hypothesis per detection
                 detection_multiple_hypothesis = \
