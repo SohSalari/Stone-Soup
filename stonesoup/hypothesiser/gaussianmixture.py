@@ -15,11 +15,9 @@ class GaussianMixtureHypothesiser(Hypothesiser):
     pertaining to an individual component-detection hypothesis
     """
 
-    hypothesiser = Property(
-        Hypothesiser,
+    hypothesiser: Hypothesiser = Property(
         doc="Underlying hypothesiser used to generate detection-target pairs")
-    order_by_detection = Property(
-        bool,
+    order_by_detection: bool = Property(
         default=False,
         doc="Flag to order the :class:`~.MultipleHypothesis` "
             "list by detection or component")
@@ -92,12 +90,12 @@ class GaussianMixtureHypothesiser(Hypothesiser):
             reordered_hypotheses = list()
             # Get miss detected components
             miss_detections_hypothesis = MultipleHypothesis(
-                [hyp for hyp in single_hypothesis_list if not hyp])
+                [x for x in single_hypothesis_list if not x])
             for detection in detections:
                 # Create multiple hypothesis per detection
                 detection_multiple_hypothesis = \
-                    MultipleHypothesis([hyp for hyp in single_hypothesis_list
-                                            if hyp.measurement == detection])
+                    MultipleHypothesis(list([hypothesis for hypothesis in single_hypothesis_list
+                                            if hypothesis.measurement == detection]))
                 # Add to new list
                 reordered_hypotheses.append(detection_multiple_hypothesis)
             # Add miss detected hypothesis to end
